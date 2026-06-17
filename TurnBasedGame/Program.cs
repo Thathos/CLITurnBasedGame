@@ -1,15 +1,38 @@
-﻿namespace TurnBasedGame
+﻿using System;
+
+namespace TurnBasedGame
 {
     internal class Program
     {
+        //for progression system, when an enemy is defeated. choose another enemy in the array and multiply its stats
+
+        //items for player
+        //classes for player
+
+        //if i add player classes (mage, warrior) where do those attributes live in the program?
         static void Main(string[] args)
         {
-            Player player1 = new Player(10, 0, "Reggie");
-            Enemy enemy = new Enemy(10, 7, "Goblin");
+            Enemy[] enemyArray = [ //prefilled array with Enemy objects
+                new Enemy (6, 9, "Skeleton"),
+                new Enemy (10, 5, "Orc")
+            ];
 
-            Battle battle = new Battle(player1, enemy);
+            //Random random = new Random(); //rng to select enemy from enemyArray
+            //int enemySelect = random.Next(0, 2);
 
-            battle.BeginBattle(player1, enemy);
+            Player player1 = new Player(10, 5, "Reggie"); //hard coded player stuff, will change 
+
+            for (int i = 0; i < enemyArray.Length; i++)
+            {
+
+                Enemy newEnemy = enemyArray[i]; //the enemy selected is the enemy from the array based on index
+
+                Battle battle = new Battle(player1, newEnemy); //player and enemy sent to battle
+
+                Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}"); //debug line
+
+                battle.BeginBattle(player1, newEnemy); //begins battle
+            }
         }
     }
 }
