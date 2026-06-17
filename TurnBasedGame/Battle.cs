@@ -27,7 +27,11 @@ namespace TurnBasedGame
             while (alive)
             {
                 ProcessPlayerTurn();
-                //CheckPlayerHp(player, alive);
+                alive = CheckEnemyHp(enemy);
+                if (!alive)
+                {
+                    break;
+                }
                 ProcessEnemyTurn();
                 alive = CheckPlayerHp(player);
             }
@@ -71,7 +75,23 @@ namespace TurnBasedGame
                 return false;
             }
             return true;
-            //First commit
+        }
+
+        public bool CheckEnemyHp(Enemy enemy)
+        {
+            if (enemy.Hp > 0)
+            {
+                alive = true;
+                //return true;
+            }
+            else if (enemy.Hp <= 0)
+            {
+                alive = false;
+                Console.WriteLine($"{enemy.Name} has died! You win!");
+                return false;
+            }
+            return true;
+
         }
     }
 }
