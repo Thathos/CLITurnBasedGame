@@ -26,7 +26,7 @@ namespace TurnBasedGame
         {
             while (alive)
             {
-                ProcessPlayerTurn();
+                ProcessPlayerTurn(player);
                 alive = CheckEnemyHp(enemy);
                 if (!alive)
                 {
@@ -37,7 +37,7 @@ namespace TurnBasedGame
             }
         }
 
-        public void ProcessPlayerTurn()
+        public void ProcessPlayerTurn(Player player)
         {
 
             Console.WriteLine("What is your choice?");
@@ -48,6 +48,12 @@ namespace TurnBasedGame
                 Enemy.Hp -= Player.AttackPower;
                 Console.WriteLine($"{Player.Name} deals {Player.AttackPower} damage to {Enemy.Name}!");
                 Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} HP remaining!");
+            }
+            else if (playerChoice == 2)
+            {
+                Player.UsePotion(player);
+                Console.WriteLine($"{Player.Name} used a potion to restore their health!");
+                Console.WriteLine($"{Player.Hp}");
             }
         }
 

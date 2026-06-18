@@ -10,6 +10,8 @@ namespace TurnBasedGame
         //classes for player
 
         //if i add player classes (mage, warrior) where do those attributes live in the program?
+
+        //critical hits for player and enemy
         static void Main(string[] args)
         {
             Enemy[] enemyArray = [ //prefilled array with Enemy objects
@@ -22,7 +24,7 @@ namespace TurnBasedGame
 
             Player player1 = new Player(10, 5, "Reggie"); //hard coded player stuff, will change 
 
-            for (int i = 0; i < enemyArray.Length; i++)
+            for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
             {
 
                 Enemy newEnemy = enemyArray[i]; //the enemy selected is the enemy from the array based on index
