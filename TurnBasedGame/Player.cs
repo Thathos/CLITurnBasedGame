@@ -8,9 +8,9 @@ namespace TurnBasedGame
 {
     internal class Player : Character
     {
-        public Player player { get; set; } = null!;
-        public Player(int hp, int attackPower, string name)
-            :base(hp, attackPower, name)
+        //public Player player { get; set; } = null!;
+        public Player(int hp,  string name)
+            :base(hp, name)
         {
 
         }
@@ -20,5 +20,11 @@ namespace TurnBasedGame
         {
             player.Hp += 10;
         }
+
+        //public override int AttackEnemy(int attackPower)
+        //{
+        //    return base.AttackEnemy(attackPower);
+        //}
+
     }
 }

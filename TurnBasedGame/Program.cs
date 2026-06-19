@@ -15,14 +15,15 @@ namespace TurnBasedGame
         static void Main(string[] args)
         {
             Enemy[] enemyArray = [ //prefilled array with Enemy objects
-                new Enemy (6, 9, "Skeleton"),
-                new Enemy (10, 5, "Orc")
+                new Enemy (6,  "Skeleton"),
+                new Enemy (10,  "Orc"),
+                new Enemy (18,  "Human Warrior")
             ];
 
             //Random random = new Random(); //rng to select enemy from enemyArray
             //int enemySelect = random.Next(0, 2);
 
-            Player player1 = new Player(10, 5, "Reggie"); //hard coded player stuff, will change 
+            Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
 
             for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
             {
@@ -35,6 +36,8 @@ namespace TurnBasedGame
 
                 battle.BeginBattle(player1, newEnemy); //begins battle
             }
+
+            //randomize attack power for enemy and player
         }
     }
 }

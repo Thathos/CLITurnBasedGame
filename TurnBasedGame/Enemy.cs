@@ -9,10 +9,15 @@ namespace TurnBasedGame
     internal class Enemy : Character
     {
 
-        public Enemy(int hp, int attackPower, string name)
-            :base(hp, attackPower, name)
+        public Enemy(int hp,  string name)
+            :base(hp,  name)
         {
 
         }
+
+        //public override int AttackEnemy(int attackPower)
+        //{
+        //    return base.AttackEnemy(attackPower);
+        //}
     }
 }

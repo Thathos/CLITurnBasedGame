@@ -26,28 +26,29 @@ namespace TurnBasedGame
         {
             while (alive)
             {
-                ProcessPlayerTurn(player);
+                ProcessPlayerTurn(player, enemy);
                 alive = CheckEnemyHp(enemy);
                 if (!alive)
                 {
                     break;
                 }
-                ProcessEnemyTurn();
+                ProcessEnemyTurn(enemy, player);
                 alive = CheckPlayerHp(player);
             }
         }
 
-        public void ProcessPlayerTurn(Player player)
+        public void ProcessPlayerTurn(Player player, Enemy enemy)
         {
 
             Console.WriteLine("What is your choice?");
             int playerChoice = int.Parse(Console.ReadLine());
             if (playerChoice == 1)
             {
-                Console.WriteLine($"{Player.Name} attacks {Enemy.Name}!");
-                Enemy.Hp -= Player.AttackPower;
-                Console.WriteLine($"{Player.Name} deals {Player.AttackPower} damage to {Enemy.Name}!");
-                Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} HP remaining!");
+                int attack = player.AttackEnemy();
+                Enemy.Hp -= attack;
+                Console.WriteLine($"{player.Name} deals {attack} damage to {enemy.Name}!");
+                Console.WriteLine($"{enemy.Name} has {enemy.Hp} HP remaining!");
+
             }
             else if (playerChoice == 2)
             {
@@ -57,13 +58,13 @@ namespace TurnBasedGame
             }
         }
 
-        public void ProcessEnemyTurn()
+        public void ProcessEnemyTurn(Enemy enemy, Player player)
         {
-            //Random random = new Random();
-            //int enemyAttack = random.Next(1, 5);
-            Console.WriteLine($"{Enemy.Name} deals {Enemy.AttackPower} damage to {Player.Name}!");
-            Player.Hp -= Enemy.AttackPower;
-            Console.WriteLine($"{Player.Name} has {Player.Hp} HP remaining!");
+            int attack = Player.AttackEnemy();
+            Player.Hp -= attack;
+            Console.WriteLine($"{enemy.Name} deals {attack} damage to {player.Name}!");
+            Console.WriteLine($"{player.Name} has {player.Hp} HP remaining!");
+
         }
 
         public bool CheckPlayerHp(Player player)
