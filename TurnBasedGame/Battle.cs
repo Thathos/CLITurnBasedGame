@@ -22,19 +22,20 @@ namespace TurnBasedGame
         }
 
 
-        public void BeginBattle(Player player, Enemy enemy)
+        public bool BeginBattle(Player player, Enemy enemy, bool alive)
         {
             while (alive)
             {
                 ProcessPlayerTurn(player, enemy);
-                alive = CheckEnemyHp(enemy);
+                CheckEnemyHp(enemy, alive);
+                ProcessEnemyTurn(enemy, player);
+                CheckPlayerHp(player, alive);
                 if (!alive)
                 {
-                    break;
+                    return false;
                 }
-                ProcessEnemyTurn(enemy, player);
-                alive = CheckPlayerHp(player);
             }
+            return true;
         }
 
         public void ProcessPlayerTurn(Player player, Enemy enemy)
@@ -67,7 +68,7 @@ namespace TurnBasedGame
 
         }
 
-        public bool CheckPlayerHp(Player player)
+        public bool CheckPlayerHp(Player player, bool alive)
         {
             
             if (player.Hp > 0)
@@ -84,7 +85,7 @@ namespace TurnBasedGame
             return true;
         }
 
-        public bool CheckEnemyHp(Enemy enemy)
+        public bool CheckEnemyHp(Enemy enemy, bool alive)
         {
             if (enemy.Hp > 0)
             {

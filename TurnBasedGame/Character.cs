@@ -15,7 +15,6 @@ namespace TurnBasedGame
         public Character(int hp,  string name)
         {
             Hp = hp;
-            //AttackPower = attackPower;
             Name = name;
         }
 

@@ -14,10 +14,5 @@ namespace TurnBasedGame
         {
 
         }
-
-        //public override int AttackEnemy(int attackPower)
-        //{
-        //    return base.AttackEnemy(attackPower);
-        //}
     }
 }

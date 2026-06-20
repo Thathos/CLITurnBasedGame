@@ -4,8 +4,6 @@ namespace TurnBasedGame
 {
     internal class Program
     {
-        //for progression system, when an enemy is defeated. choose another enemy in the array and multiply its stats
-
         //items for player
         //classes for player
 
@@ -20,10 +18,9 @@ namespace TurnBasedGame
                 new Enemy (18,  "Human Warrior")
             ];
 
-            //Random random = new Random(); //rng to select enemy from enemyArray
-            //int enemySelect = random.Next(0, 2);
+            bool alive = true;
 
-            Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
+            Player player1 = new Player(1, "Reggie"); //hard coded player stuff, will change 
 
             for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
             {
@@ -32,12 +29,11 @@ namespace TurnBasedGame
 
                 Battle battle = new Battle(player1, newEnemy); //player and enemy sent to battle
 
-                Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}"); //debug line
+                Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}"); 
 
-                battle.BeginBattle(player1, newEnemy); //begins battle
+               battle.BeginBattle(player1, newEnemy, alive); //begins battle
             }
-
-            //randomize attack power for enemy and player
+            
         }
     }
 }

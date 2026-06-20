@@ -8,23 +8,27 @@ namespace TurnBasedGame
 {
     internal class Player : Character
     {
-        //public Player player { get; set; } = null!;
-        public Player(int hp,  string name)
+        public int potionCount = 2;
+        public Player(int hp, string name)
             :base(hp, name)
         {
 
         }
 
-        //add potions to increase health
+        //potions to increase health
         public void UsePotion(Player player)
         {
-            player.Hp += 10;
+            if (potionCount <= 0)
+            {
+                Console.WriteLine("You have no potions remaining!");
+            }
+            else if (potionCount > 0)
+            {
+                player.Hp += 10;
+                potionCount--;
+            }
         }
 
-        //public override int AttackEnemy(int attackPower)
-        //{
-        //    return base.AttackEnemy(attackPower);
-        //}
 
     }
 }
