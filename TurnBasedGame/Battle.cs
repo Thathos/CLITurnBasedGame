@@ -13,7 +13,7 @@ namespace TurnBasedGame
         public Player Player { get; set; } = null!;
 
         public Enemy Enemy { get; set; } = null!;
-        public bool alive { get; set; } = true;
+        //public bool alive { get; set; } = true;
 
         public Battle(Player player, Enemy enemy)
         {
@@ -24,13 +24,17 @@ namespace TurnBasedGame
 
         public bool BeginBattle(Player player, Enemy enemy, bool alive)
         {
-            while (alive)
+            while (alive) //while the player is alive
             {
-                ProcessPlayerTurn(player, enemy);
-                CheckEnemyHp(enemy, alive);
-                ProcessEnemyTurn(enemy, player);
-                CheckPlayerHp(player, alive);
-                if (!alive)
+                ProcessPlayerTurn(player, enemy); //process the player's turn
+                bool isEnemyAlive = CheckEnemyHp(enemy); //check the enemies' hp with a boolean variable
+                if (!isEnemyAlive) //if the enemy is not alive break out of the loop to move on to the next enemy
+                {
+                    break;
+                }
+                ProcessEnemyTurn(enemy, player); //process the player's turn
+                bool isPlayerAlive = CheckPlayerHp(player); //check the player's hp with a boolean variable
+                if (!isPlayerAlive) //if the player is not alive, return false
                 {
                     return false;
                 }
@@ -46,55 +50,59 @@ namespace TurnBasedGame
             if (playerChoice == 1)
             {
                 int attack = player.AttackEnemy();
-                Enemy.Hp -= attack;
+                enemy.Hp -= attack;
                 Console.WriteLine($"{player.Name} deals {attack} damage to {enemy.Name}!");
                 Console.WriteLine($"{enemy.Name} has {enemy.Hp} HP remaining!");
 
             }
             else if (playerChoice == 2)
             {
-                Player.UsePotion(player);
-                Console.WriteLine($"{Player.Name} used a potion to restore their health!");
-                Console.WriteLine($"{Player.Hp}");
+                player.UsePotion(player);
+                Console.WriteLine($"{player.Name} used a potion to restore their health!");
+                Console.WriteLine($"{player.Hp}");
             }
         }
 
         public void ProcessEnemyTurn(Enemy enemy, Player player)
         {
             int attack = Player.AttackEnemy();
-            Player.Hp -= attack;
+            player.Hp -= attack;
+            if (player.Hp < 0)
+            {
+                player.Hp = 0;
+            }
             Console.WriteLine($"{enemy.Name} deals {attack} damage to {player.Name}!");
             Console.WriteLine($"{player.Name} has {player.Hp} HP remaining!");
 
         }
 
-        public bool CheckPlayerHp(Player player, bool alive)
+        public bool CheckPlayerHp(Player player)
         {
             
             if (player.Hp > 0)
             {
-                alive = true;
+                //alive = true;
                 //return true;
             }
-            else if (player.Hp <= 0)
+            else if (player.Hp == 0)
             {
-                alive = false;
+                //alive = false;
                 Console.WriteLine($"{player.Name} has died! You lose...");
                 return false;
             }
             return true;
         }
 
-        public bool CheckEnemyHp(Enemy enemy, bool alive)
+        public bool CheckEnemyHp(Enemy enemy)
         {
             if (enemy.Hp > 0)
             {
-                alive = true;
+                //alive = true;
                 //return true;
             }
             else if (enemy.Hp <= 0)
             {
-                alive = false;
+                //alive = false;
                 Console.WriteLine($"{enemy.Name} has died! You win!");
                 return false;
             }

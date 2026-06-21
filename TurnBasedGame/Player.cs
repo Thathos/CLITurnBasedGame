@@ -18,14 +18,14 @@ namespace TurnBasedGame
         //potions to increase health
         public void UsePotion(Player player)
         {
-            if (potionCount <= 0)
+            if (potionCount <= 0) //if potion count is 0 write the message and forfeit your turn, which is bad
             {
                 Console.WriteLine("You have no potions remaining!");
             }
-            else if (potionCount > 0)
+            else if (potionCount > 0) 
             {
-                player.Hp += 10;
-                potionCount--;
+                player.Hp += 10; //add the potion to the player's health
+                potionCount--; //decrement potion count
             }
         }
 

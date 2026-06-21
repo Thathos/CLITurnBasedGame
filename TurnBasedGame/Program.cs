@@ -13,14 +13,14 @@ namespace TurnBasedGame
         static void Main(string[] args)
         {
             Enemy[] enemyArray = [ //prefilled array with Enemy objects
-                new Enemy (6,  "Skeleton"),
-                new Enemy (10,  "Orc"),
-                new Enemy (18,  "Human Warrior")
+                new Enemy (1,  "Skeleton"),
+                new Enemy (1,  "Orc"),
+                new Enemy (1,  "Human Warrior")
             ];
 
-            bool alive = true;
+            bool alive = true; //boolean variable to check if player is alive
 
-            Player player1 = new Player(1, "Reggie"); //hard coded player stuff, will change 
+            Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
 
             for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
             {
@@ -31,7 +31,16 @@ namespace TurnBasedGame
 
                 Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}"); 
 
-               battle.BeginBattle(player1, newEnemy, alive); //begins battle
+               bool isAlive = battle.BeginBattle(player1, newEnemy, alive); //begins battle with boolean variable to check if player is alive
+
+                if (!isAlive) //if the player is not alive exit the loop and end the game
+                {
+                    break;
+                }
+                else if (isAlive)
+                {
+                    continue;
+                }
             }
             
         }
