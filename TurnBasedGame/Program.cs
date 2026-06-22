@@ -12,37 +12,55 @@ namespace TurnBasedGame
         //critical hits for player and enemy
         static void Main(string[] args)
         {
-            Enemy[] enemyArray = [ //prefilled array with Enemy objects
-                new Enemy (1,  "Skeleton"),
-                new Enemy (1,  "Orc"),
-                new Enemy (1,  "Human Warrior")
-            ];
+            bool playAgain = true;
 
-            bool alive = true; //boolean variable to check if player is alive
-
-            Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
-
-            for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
+            while (playAgain)
             {
 
-                Enemy newEnemy = enemyArray[i]; //the enemy selected is the enemy from the array based on index
+                Enemy[] enemyArray = [ //prefilled array with Enemy objects
+                new Enemy (7,  "Skeleton"),
+                new Enemy (13,  "Orc"),
+                new Enemy (19,  "Human Warrior")
+                ];
 
-                Battle battle = new Battle(player1, newEnemy); //player and enemy sent to battle
+                bool alive = true; //boolean variable to check if player is alive
 
-                Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}"); 
+                Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
 
-               bool isAlive = battle.BeginBattle(player1, newEnemy, alive); //begins battle with boolean variable to check if player is alive
 
-                if (!isAlive) //if the player is not alive exit the loop and end the game
+
+                for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
                 {
-                    break;
+
+                    Enemy newEnemy = enemyArray[i]; //the enemy selected is the enemy from the array based on index
+
+                    Battle battle = new Battle(player1, newEnemy); //player and enemy sent to battle
+
+                    Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}");
+
+                    bool isAlive = battle.BeginBattle(player1, newEnemy, alive); //begins battle with boolean variable to check if player is alive
+
+                    if (!isAlive) //if the player is not alive exit the loop and end the game
+                    {
+                        break;
+                    }
+                    else if (isAlive)
+                    {
+                        continue;
+                    }
                 }
-                else if (isAlive)
+                Console.WriteLine("1 to play again. 2 to exit application.");
+                int userChoice = int.Parse(Console.ReadLine());
+                if (userChoice == 1)
                 {
                     continue;
                 }
+                else if (userChoice == 2)
+                {
+                    break;
+                }
+
             }
-            
         }
     }
 }
