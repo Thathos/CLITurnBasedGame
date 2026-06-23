@@ -12,6 +12,8 @@ namespace TurnBasedGame
         public int AttackPower { get; set; }
         public string Name { get; set; }
 
+
+
         public Character(int hp,  string name)
         {
             Hp = hp;
