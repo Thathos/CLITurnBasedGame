@@ -14,7 +14,6 @@ namespace TurnBasedGame
         public Player Player { get; set; } = null!;
 
         public Enemy Enemy { get; set; } = null!;
-        //public bool alive { get; set; } = true;
 
         public Battle(Player player, Enemy enemy)
         {
@@ -23,9 +22,9 @@ namespace TurnBasedGame
         }
 
 
-        public bool BeginBattle(bool alive)
+        public bool BeginBattle()
         {
-            while (alive) //while the player is alive
+            while (true) //while the player is alive
             {
                 bool success = ProcessPlayerTurn(); //process the player's turn
                 if (!success)
@@ -64,7 +63,7 @@ namespace TurnBasedGame
                 }
                 else if (playerChoice == 2)
                 {
-                    Player.UsePotion(Player);
+                    Player.UsePotion();
                     Console.WriteLine($"{Player.Name} used a potion to restore their health!");
                     Console.WriteLine($"{Player.Hp}");
                     return true;

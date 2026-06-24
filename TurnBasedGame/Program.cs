@@ -38,28 +38,20 @@ namespace TurnBasedGame
 
                     Console.WriteLine($"Beginning battle with {player1.Name} and {newEnemy.Name}");
 
-                    bool isAlive = battle.BeginBattle(player1, newEnemy, alive); //begins battle with boolean variable to check if player is alive
+                    bool isAlive = battle.BeginBattle(); //begins battle with boolean variable to check if player is alive
 
                     if (!isAlive) //if the player is not alive exit the loop and end the game
                     {
                         break;
                     }
-                    else if (isAlive)
-                    {
-                        continue;
-                    }
                 }
                 Console.WriteLine("1 to play again. 2 to exit application.");
-                int userChoice = int.Parse(Console.ReadLine());
-                if (userChoice == 1)
-                {
-                    continue;
-                }
-                else if (userChoice == 2)
+
+                string? input = Console.ReadLine();
+                if (!int.TryParse(input, out int userChoice) || userChoice != 1)
                 {
                     break;
                 }
-
             }
         }
     }
