@@ -23,11 +23,7 @@ namespace TurnBasedGame
                 new Enemy (19,  "Human Warrior")
                 ];
 
-                bool alive = true; //boolean variable to check if player is alive
-
-                Player player1 = new Player(10, "Reggie"); //hard coded player stuff, will change 
-
-
+                Player player1 = new Mage(10, "Reggie"); //hard coded player stuff, will change 
 
                 for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
                 {

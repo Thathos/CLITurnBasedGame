@@ -9,10 +9,9 @@ namespace TurnBasedGame
     internal class Character
     {
         public int Hp { get; set; }
-        public int AttackPower { get; set; }
         public string Name { get; set; }
 
-
+        protected static readonly Random _rng = new(); //creating a Random object once for the Character class
 
         public Character(int hp,  string name)
         {
@@ -22,9 +21,28 @@ namespace TurnBasedGame
 
         public virtual int AttackEnemy()
         {
-            Random random = new Random();
-            int attackPower = random.Next(1, 5);
-            return attackPower;
+            return _rng.Next(1, 5);
+        }
+
+        public void DeductHealth(int damage)
+        {
+            Hp -= damage;
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
+
+        public bool IsAlive() //checks the target's hp
+        {
+            if (Hp > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
