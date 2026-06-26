@@ -9,6 +9,8 @@ namespace TurnBasedGame
     internal class Player : Character
     {
         private int _potionCount = 2;
+        private int _manaPotionCount = 1;
+
         public Player(int hp, string name)
             : base(hp, name)
         {
@@ -27,6 +29,30 @@ namespace TurnBasedGame
             _potionCount--; //decrement potion count
             return true;
         }
+
+        public bool UseManaPotion()
+        {
+            if (_manaPotionCount <= 0)
+            {
+                Console.WriteLine("You have no mana potions remaining!");
+                return false;
+            }
+            Mana += 10;
+            _manaPotionCount--;
+            return true;
+
+        }
+
+        public bool DeductMana()
+        {
+            if (Mana < 6)
+            {
+                return false;
+            }
+            Mana -= 6;
+            return true;
+        }
+
 
     }
 }

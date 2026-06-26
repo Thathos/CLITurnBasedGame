@@ -9,7 +9,6 @@ namespace TurnBasedGame
     //Just playing with adding classes.
     internal class Mage : Player
     {
-        private int _mana = 10;
 
         public Mage(int hp, string name)
             : base(hp, name)
@@ -27,9 +26,6 @@ namespace TurnBasedGame
             return _rng.Next(3, 7);
         }
 
-        public void DeductMana()
-        {
-            _mana -= 6;
-        }
+
     }
 }

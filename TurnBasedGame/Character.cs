@@ -10,6 +10,7 @@ namespace TurnBasedGame
     {
         public int Hp { get; set; }
         public string Name { get; set; }
+        public int Mana { get; set; }
 
         protected static readonly Random _rng = new(); //creating a Random object once for the Character class
 

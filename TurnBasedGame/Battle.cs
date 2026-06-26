@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -13,13 +14,12 @@ namespace TurnBasedGame
     {
         public Player Player { get; set; } = null!;
         public Enemy Enemy { get; set; } = null!;
-        public Mage Mage { get; set; } = null!;
 
         public Battle(Player player, Enemy enemy)
         {
             Player = player;
             Enemy = enemy;
-            
+
         }
 
 
@@ -73,23 +73,44 @@ namespace TurnBasedGame
                 Console.WriteLine($"{Player.Hp}");
                 return true;
             }
-            else if(playerChoice == 3)
+            else if (playerChoice == 3)
             {
                 if (Player is Mage mage)
                 {
-                    int attack = mage.CastFireball();
-                    Enemy.DeductHealth(attack);
-                    Console.WriteLine($"{Player.Name} casts fireball and deals {attack} damage to {Enemy.Name}!");
-                    Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} HP remaining!");
-                    return true;
+                    while (true)
+                    {
+                        int attack = mage.CastFireball();
+                        bool spellSuccess = mage.DeductMana();
+                        if (!spellSuccess)
+                        {
+                            Console.WriteLine("Not enough mana!");
+                            break;
+                        }
+                        else
+                        {
+                            Enemy.DeductHealth(attack);
+                            Console.WriteLine($"{Player.Name} casts fireball and deals {attack} damage to {Enemy.Name}!");
+                            Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} HP remaining!");
+
+                        }
+                        return true;
+
+                    }
                 }
-                return false;
+            }
+            else if (playerChoice == 4)
+            {
+                Player.UseManaPotion();
+                Player.DeductMana();
+                Console.WriteLine($"{Player.Name} restores 10 mana!");
+                return true;
             }
             else //reject any other input
             {
                 Console.WriteLine("Please enter a valid selection");
                 return false;
             }
+            return false;
         }
 
         public void ProcessEnemyTurn() //process the player turn. right now its only attack
