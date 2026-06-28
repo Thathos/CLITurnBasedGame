@@ -51,7 +51,8 @@ namespace TurnBasedGame
 
         public bool ProcessPlayerTurn()
         {
-            Console.WriteLine("What is your choice? 1 for attack 2 for potion");
+            //Console.WriteLine("What is your choice? 1 for attack 2 for potion");
+            Player.Menu();
             string? input = Console.ReadLine(); //attempt to convert the string input to an int. If successful carry out the operation
             if (!int.TryParse(input, out int playerChoice))
             {
@@ -70,39 +71,33 @@ namespace TurnBasedGame
             {
                 Player.UsePotion();
                 Console.WriteLine($"{Player.Name} used a potion to restore their health!");
-                Console.WriteLine($"{Player.Hp}");
+                Console.WriteLine($"{Player.Name} has {Player.Hp} remaining!.");
                 return true;
             }
             else if (playerChoice == 3)
             {
-                if (Player is Mage mage)
+                while (true)
                 {
-                    while (true)
+                    bool spellSuccess = Player.DeductMana();
+                    if (!spellSuccess)
                     {
-                        int attack = mage.CastFireball();
-                        bool spellSuccess = mage.DeductMana();
-                        if (!spellSuccess)
-                        {
-                            Console.WriteLine("Not enough mana!");
-                            break;
-                        }
-                        else
-                        {
-                            Enemy.DeductHealth(attack);
-                            Console.WriteLine($"{Player.Name} casts fireball and deals {attack} damage to {Enemy.Name}!");
-                            Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} HP remaining!");
-
-                        }
-                        return true;
-
+                        Console.WriteLine("Not enough mana!");
+                        break;
                     }
+                    else
+                    {
+                        int attack = Player.SpecialAttack(Player);
+                        Enemy.DeductHealth(attack);
+                        Console.WriteLine($"{Player.Name} deals {attack} damage!");
+                        Console.WriteLine($"{Enemy.Name} has {Enemy.Hp} health remaining!");
+                    }
+                    return true;
                 }
             }
             else if (playerChoice == 4)
             {
                 Player.UseManaPotion();
-                Player.DeductMana();
-                Console.WriteLine($"{Player.Name} restores 10 mana!");
+                Console.WriteLine($"{Player.Name} restores 10 mana! {Player.Name} has {Player.Mana} mana remaining!");
                 return true;
             }
             else //reject any other input

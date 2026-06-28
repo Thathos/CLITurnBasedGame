@@ -10,8 +10,8 @@ namespace TurnBasedGame
     internal class Mage : Player
     {
 
-        public Mage(int hp, string name)
-            : base(hp, name)
+        public Mage(int hp, string name, int mana)
+            : base(hp, name, mana)
         {
 
         }
@@ -21,11 +21,18 @@ namespace TurnBasedGame
             return base.AttackEnemy();
         }
 
-        public int CastFireball()
+        public override int SpecialAttack(Player player)
         {
+            Console.WriteLine($"{player.Name} casts fireball!");
             return _rng.Next(3, 7);
         }
 
-
+        public override void Menu()
+        {
+            Console.WriteLine($"1.)Attack");
+            Console.WriteLine($"2.) Use Health potion");
+            Console.WriteLine($"3.) Fireball");
+            //base.Menu();
+        }
     }
 }

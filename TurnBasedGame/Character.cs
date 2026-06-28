@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,11 @@ namespace TurnBasedGame
 
         protected static readonly Random _rng = new(); //creating a Random object once for the Character class
 
-        public Character(int hp,  string name)
+        public Character(int hp,  string name, int mana)
         {
             Hp = hp;
             Name = name;
+            Mana = mana;
         }
 
         public virtual int AttackEnemy()
@@ -45,5 +47,17 @@ namespace TurnBasedGame
                 return false;
             }
         }
+
+        public bool DeductMana()
+        {
+            if (Mana < 6)
+            {
+                return false;
+            }
+            Mana -= 6;
+            return true;
+        }
+
+
     }
 }

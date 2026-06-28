@@ -11,8 +11,8 @@ namespace TurnBasedGame
         private int _potionCount = 2;
         private int _manaPotionCount = 1;
 
-        public Player(int hp, string name)
-            : base(hp, name)
+        public Player(int hp, string name, int mana)
+            : base(hp, name, mana)
         {
 
         }
@@ -43,16 +43,17 @@ namespace TurnBasedGame
 
         }
 
-        public bool DeductMana()
+        public virtual void Menu()
         {
-            if (Mana < 6)
-            {
-                return false;
-            }
-            Mana -= 6;
-            return true;
+            Console.WriteLine($"1.)Attack");
+            Console.WriteLine($"2.) Use Health potion");
+            Console.WriteLine($"3.) Special Attack");
         }
 
+        public virtual int SpecialAttack(Player player)
+        {
+            return _rng.Next(3, 7);
 
+        }
     }
 }

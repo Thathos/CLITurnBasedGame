@@ -4,6 +4,8 @@ namespace TurnBasedGame
 {
     internal class Program
     {
+        //Fix mana in character class
+
         //items for player
         //classes for player
 
@@ -18,12 +20,12 @@ namespace TurnBasedGame
             {
 
                 Enemy[] enemyArray = [ //prefilled array with Enemy objects
-                new Enemy (7,  "Skeleton"),
-                new Enemy (13,  "Orc"),
-                new Enemy (19,  "Human Warrior")
+                new Enemy (7,  "Skeleton", 10),
+                new Enemy (13,  "Orc", 10),
+                new Enemy (19,  "Human Warrior", 10)
                 ];
 
-                Player player1 = new Mage(10, "Reggie"); //hard coded player stuff, will change 
+                Player player1 = new Mage(10, "Reggie", 10); //hard coded player stuff, will change 
 
                 for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
                 {

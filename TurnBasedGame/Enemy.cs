@@ -9,8 +9,8 @@ namespace TurnBasedGame
     internal class Enemy : Character
     {
 
-        public Enemy(int hp,  string name)
-            :base(hp,  name)
+        public Enemy(int hp,  string name, int mana)
+            :base(hp,  name, mana)
         {
 
         }
