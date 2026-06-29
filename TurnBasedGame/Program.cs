@@ -14,18 +14,34 @@ namespace TurnBasedGame
         //critical hits for player and enemy
         static void Main(string[] args)
         {
+            Enemy[] enemyArray = [ //prefilled array with Enemy objects
+                new Enemy (7,  "Skeleton", 10),
+                new Enemy (13,  "Orc", 10),
+                new Enemy (19,  "Human Warrior", 10)
+            ];
+
+            Player player1 = null;
+            Console.WriteLine("Please enter your name.");
+            string? name = Console.ReadLine();
+            Console.WriteLine("Please enter your class.");
+            string? classType = Console.ReadLine();
+            if (!int.TryParse(classType, out int userClass){
+                Console.WriteLine("Please enter a valid option");
+                
+            }
+            else if (userClass == 1)
+            {
+                Console.WriteLine("You chose mage.");
+                player1 = new Mage(10, name, 10);
+            }
+
             bool playAgain = true;
 
             while (playAgain)
             {
 
-                Enemy[] enemyArray = [ //prefilled array with Enemy objects
-                new Enemy (7,  "Skeleton", 10),
-                new Enemy (13,  "Orc", 10),
-                new Enemy (19,  "Human Warrior", 10)
-                ];
 
-                Player player1 = new Mage(10, "Reggie", 10); //hard coded player stuff, will change 
+                //Player player1 = new Mage(10, "Reggie", 10); //hard coded player stuff, will change 
 
                 for (int i = 0; i < enemyArray.Length; i++) //for loop to handle progression
                 {
