@@ -20,20 +20,33 @@ namespace TurnBasedGame
                 new Enemy (19,  "Human Warrior", 10)
             ];
 
-            Player player1 = null;
+            Player player1 = null!;
+
             Console.WriteLine("Please enter your name.");
             string? name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = "a guy";
+            }
+
             Console.WriteLine("Please enter your class.");
             string? classType = Console.ReadLine();
-            if (!int.TryParse(classType, out int userClass){
+            if (!int.TryParse(classType, out int userClass)){
                 Console.WriteLine("Please enter a valid option");
                 
             }
-            else if (userClass == 1)
+
+            switch (userClass)
             {
-                Console.WriteLine("You chose mage.");
-                player1 = new Mage(10, name, 10);
+                case 1:
+                    Console.WriteLine("You chose mage.");
+                    player1 = new Mage(10, name, 10);
+                    break;
+                default:
+                    Console.WriteLine("PLease select 1, 2, or 3");
+                    break;
             }
+            
 
             bool playAgain = true;
 
